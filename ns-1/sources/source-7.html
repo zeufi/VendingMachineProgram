@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TextVendingMachineInterface</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: TextVendingMachineInterface (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TextVendingMachineInterface</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><b class="fc"><i class="no-highlight">1</i>&nbsp;public class TextVendingMachineInterface implements VendingMachineInterface {</b>
+<b class="fc"><i class="no-highlight">2</i>&nbsp;    private VendingMachineController controller = new SimpleVendingMachineController();</b>
+<i class="no-highlight">3</i>&nbsp;    private int selectedProduct;
+<i class="no-highlight">4</i>&nbsp;    private CoinBundle change;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;    @Override
+<i class="no-highlight">7</i>&nbsp;    public void displayProducts() {
+<b class="fc"><i class="no-highlight">8</i>&nbsp;        System.out.println(&quot; ******************************************&quot;);</b>
+<b class="fc"><i class="no-highlight">9</i>&nbsp;        System.out.println(&quot; *   WELCOME TO THE VENDING MACHINE       *  &quot;);</b>
+<b class="fc"><i class="no-highlight">10</i>&nbsp;        System.out.println(&quot; ******************************************&quot;);</b>
+<b class="fc"><i class="no-highlight">11</i>&nbsp;        System.out.println(&quot;     Products available:               &quot;);</b>
+<b class="fc"><i class="no-highlight">12</i>&nbsp;        System.out.println(&quot;                                              &quot;);</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;        for(Product product: Product.values()){</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;            if(!Product.EMPTY.equals(product)) {</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;                System.out.println(&quot;     &quot; + product.getSelectionNumber() + &quot;  &quot; + product.name() + &quot; - Price: &quot; + product.getPrice() + &quot;   &quot;);</b>
+<i class="no-highlight">16</i>&nbsp;            }
+<i class="no-highlight">17</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">18</i>&nbsp;        System.out.println(&quot;                                              &quot;);</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        System.out.println(&quot; Please select your product: &quot;);</b>
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;    }
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;    @Override
+<i class="no-highlight">25</i>&nbsp;    public int selectProduct(int product) {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        this.selectedProduct = product;</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        return product;</b>
+<i class="no-highlight">28</i>&nbsp;    }
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    @Override
+<i class="no-highlight">31</i>&nbsp;    public void displayEnterCoinsMessage() {
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        System.out.println(&quot; Please enter coins as follows: &quot;);</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        System.out.println(&quot; num of 1 cents coins,num of 5 cents coins,num of 10 cents coins,num of 25 cents coins  &quot;);</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        System.out.println(&quot;                                              &quot;);</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        System.out.println(&quot; Example: If you would like to enter 2 ten cents coins: 0,0,2,0&quot;);</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        System.out.println(&quot;Please enter coins:&quot;);</b>
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;    }
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;    @Override
+<i class="no-highlight">41</i>&nbsp;    public void enterCoins(int... coins) {
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        VendingMachineRequest request = new VendingMachineRequest(selectedProduct, coins);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        change = controller.calculateChange(request);</b>
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    }
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;    @Override
+<i class="no-highlight">48</i>&nbsp;    public void displayChangeMessage() {
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        System.out.println(&quot;                                              &quot;);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        System.out.println(&quot;Your change is : &quot;+ change.getTotal() + &quot; cents split as follows: &quot;);</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        System.out.println(&quot;    25 cents coins: &quot;+ change.number25CentsCoins);</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        System.out.println(&quot;    10 cents coins: &quot;+ change.number10CentsCoins);</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        System.out.println(&quot;    5 cents coins: &quot;+ change.number5CentsCoins);</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        System.out.println(&quot;    1 cents coins: &quot;+ change.number1CentsCoins);</b>
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    }
+<i class="no-highlight">57</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-05-27 16:56</div>
+</div>
+</body>
+</html>
